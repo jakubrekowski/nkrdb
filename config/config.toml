@@ -1,0 +1,14 @@
+version = "0.1-alpha"
+
+[build]
+type = "DEV"
+
+[database]
+ip = "localhost"
+port = 63921
+name = "nkr"
+dir = "/home/req/.local/share/nkrdb"
+
+[service_account] # from iam.unoff.pl
+path = "/home/req/PycharmProjects/nkrDB/config/service_account.toml"
+public_key = "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAspuaZEPaQBBzXUJpHXkI\nsnxsOZE7b1Tr/Q25LU0iVYA5UYfZdQnR62xoJriwCYJNLlvQJeKxNxuBfM/299xe\n89xN232rcj2fhJBLDbr3zjMeVxNdg3m1LvYI9WjbA+UOhLXEu0ZpIcifRrkW/6T8\nvY6ANRkigc1ErkmKI1EUiWsQzr7kY9dK2JcWlTSG6lxLkq2UWx1kAEpJiZRUfqgP\nZzUBmJg3VmeGFeU2y4K8eX/b4gs1idHcc+RmfGke9B7DnUjcOpHkDev1YhdjAWpK\nsmJWYplUmvWEJgrWomZYbiXDc7D1yl21kNqQbI6t9fevGfZeOF7hA/GNWlUu/Sli\nsEfKsyBieh91Ufq4PI1qWRtTCBY33sGJxB9/UQlsxDMp9GEDUaFvqX87aICyx/rl\nsa0exyL6skecadfJ9OgWTWbjqfPgqHssjDEwjWdZveRkEB5fDyOp3cvk3a90finQ\nK1Vphbx5XqtpzYOVMfEpfLVsVuu2vzePXct8FNRqPhc+XLs8dnfzGYsdnWOIsqCC\nTm6eo3bDFKs83/ZZmtsyC5kIMBRxtAW24zpXoVaP0t5gOqJr7whbSoqjYvkI2Stw\n39g/D5wej8djIDHqnMdfZbZUkmIvwNmlb52BK5AKPDuewPXnB5AilKDNFk0EdySx\nG9AwuXrqpTik8CLPWT7bTFUCAwEAAQ==\n-----END PUBLIC KEY-----"

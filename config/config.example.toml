@@ -1,0 +1,16 @@
+# RENAME THIS FILE TO `config.toml` before first execution
+
+version = "0.1-alpha"
+
+[build]
+type = "DEV"
+
+[database]
+ip = "localhost"
+port = 63921
+name = "[NAME]"
+dir = "/home/[USER]/.local/share/nkrdb"
+
+[service_account] # from iam.unoff.pl
+path = "[PATH]/service_account.toml"
+public_key = ""
