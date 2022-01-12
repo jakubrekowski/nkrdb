@@ -14,7 +14,12 @@ class Request:
 
     def __init__(self, arr: bytes, conn: socket):
         request = decode(arr.decode('utf-8'))
-        # logging.info(f'{request.get("iss")} requested for {request.get("type")}')
+
+        print(request)
+
+        if request.get('_db_status') == 403:
+            conn.sendall(bytes(json.dumps(request).encode('utf-8')))
+            return
 
         doc = Document(request.get('collection'), request.get('document'), request.get('jit'), str(uuid.uuid4()))
 
@@ -32,8 +37,8 @@ class Request:
                 print('DELETE:', doc.delete())
                 conn.sendall(bytes(json.dumps(doc.delete()).encode('utf-8')))
             case _:
-                print('Token\'s type not matched!')
+                print(f'{request.get("type")}: The request type not matched')
                 conn.sendall(bytes(json.dumps({
-                    '_db_status': 'error',
-                    '_db_message': 'Token\'s type not matched!'
+                    '_db_status': 405,
+                    '_db_message': 'The request type not matched!'
                 }).encode('utf-8')))

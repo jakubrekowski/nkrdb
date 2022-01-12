@@ -14,8 +14,8 @@ if __name__ == '__main__':
         "iss": "KXWNicgJWZg8QfDZeuY59q",
         "sub": "cHRZ3vxzJiZJbm9vPTuZbE",
         "jit": "ZfTCQtiGi4akYG584n2vxZ",
-        "type": "GET",
-        "collection": "locomotiveModels",
+        "type": "POST",
+        "collection": "/home/req/locomotiveModels",
         "document": "VaKRmf7kYNW5DfDEJ4N6HL",
         "content": "{\"key\":\"value\"}",
         "iat": 1516239022

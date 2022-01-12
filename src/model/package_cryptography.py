@@ -1,4 +1,6 @@
+import logging
 import os
+from typing import Set
 
 from src.controller.toml import toml
 from jose import jwt
@@ -14,7 +16,11 @@ def encode(payload: dict) -> str:
 
 
 def decode(token: str) -> dict:
-    # TODO: Add error exception with return it
-    return jwt.decode(token, 'kappa', algorithms=['HS256'])
-
-# TODO: Save token to logs when the signature is invalid
+    try:
+        return jwt.decode(token, 'kappa', algorithms=['HS256'])
+    except jwt.JWTError as e:
+        logging.warning(f'PACKAGE_CRYPTOGRAPHY:(401) {e} token({token})')
+        return {
+            '_db_status': 403,
+            '_db_message': str(e)
+        }
