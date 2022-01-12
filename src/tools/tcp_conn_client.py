@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((config.get('database.ip'), config.get('database.port')))
-    req = s.send(bytes(encode(payload).encode('utf-8')))
+    req = s.send(encode(payload).encode('utf-8'))
     data = s.recv(1024)
     s.close()
     print(data.decode('utf-8'))

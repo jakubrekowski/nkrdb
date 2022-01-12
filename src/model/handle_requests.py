@@ -18,7 +18,7 @@ class Request:
         print(request)
 
         if request.get('_db_status') == 403:
-            conn.sendall(bytes(json.dumps(request).encode('utf-8')))
+            conn.sendall(json.dumps(request).encode('utf-8'))
             return
 
         doc = Document(request.get('collection'), request.get('document'), request.get('jit'), str(uuid.uuid4()))
@@ -26,19 +26,19 @@ class Request:
         match request.get('type'):
             case 'GET':
                 print('GET:', doc.get())
-                conn.sendall(bytes(json.dumps(doc.get()).encode('utf-8')))
+                conn.sendall(json.dumps(doc.get()).encode('utf-8'))
             case 'POST':
                 print('POST:', doc.post(request.get('content')))
-                conn.sendall(bytes(json.dumps(doc.post(request.get('content'))).encode('utf-8')))
+                conn.sendall(json.dumps(doc.post(request.get('content'))).encode('utf-8'))
             case 'PUT':
                 print('PUT:', doc.put(request.get('content')))
-                conn.sendall(bytes(json.dumps(doc.put(request.get('content'))).encode('utf-8')))
+                conn.sendall(json.dumps(doc.put(request.get('content'))).encode('utf-8'))
             case 'DELETE':
                 print('DELETE:', doc.delete())
-                conn.sendall(bytes(json.dumps(doc.delete()).encode('utf-8')))
+                conn.sendall(json.dumps(doc.delete()).encode('utf-8'))
             case _:
                 print(f'{request.get("type")}: The request type not matched')
-                conn.sendall(bytes(json.dumps({
+                conn.sendall(json.dumps({
                     '_db_status': 405,
                     '_db_message': 'The request type not matched!'
-                }).encode('utf-8')))
+                }).encode('utf-8'))
