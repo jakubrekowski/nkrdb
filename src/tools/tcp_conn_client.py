@@ -14,10 +14,10 @@ if __name__ == '__main__':
         "iss": "KXWNicgJWZg8QfDZeuY59q",
         "sub": "cHRZ3vxzJiZJbm9vPTuZbE",
         "jit": "ZfTCQtiGi4akYG584n2vxZ",
-        "type": "POST",
-        "collection": "/home/req/locomotiveModels",
-        "document": "VaKRmf7kYNW5DfDEJ4N6HL",
-        "content": "{\"key\":\"value\"}",
+        "type": "PUT",
+        "collection": "locomotiveModels",
+        "document": "BicitydykFDkmULdAAMwH4",
+        "content": "{\"name\":\"value\"}",
         "iat": 1516239022
     }
 

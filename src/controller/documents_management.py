@@ -4,14 +4,24 @@ import os
 import shortuuid
 
 from src.controller.toml import toml
+from json import JSONDecodeError
 
 config = toml(f'{os.getcwd()}/config/config.toml')
 
 
+def input_security(string: str) -> bool: return not {'.', '/', '\\', '~'}.isdisjoint(string)
+
+
+class ProhibitedCharactersInTheRequest(Exception):
+    pass
+
+
 class Document:
     def __init__(self, collection: str, document: str, jit: str, transaction_id: str):
-        collection = collection.replace('.', '').replace('/', '').replace('~', '')
-        document = document.replace('.', '').replace('/', '').replace('~', '')
+
+        if input_security(collection) or input_security(document):
+            logging.warning(f'{transaction_id}:(400) The symbols from blacklist in request. Rejection.')
+            raise ProhibitedCharactersInTheRequest(f'(400) - The symbols from blacklist in request. Rejection.')
 
         collection_path = f'{config.get("database.dir")}/collections/{collection}'
         self.collection = collection
@@ -64,13 +74,22 @@ class Document:
 
     def put(self, content: str) -> dict:
         if self.document_exists:
-            # TODO: do that
-            logging.error(f'{self.transaction_id}:PUT(501 - The request was received, '
-                          f'but I still didn\'t write this function')
-            return {
-                '_db_status': 501,
-                '_db_message': 'I didn\'t write this yet. Please try again later.'
-            }
+            try:
+                old = json.loads(open(self.document_path, 'r').read())
+                old.update(json.loads(content))
+                doc = open(self.document_path, 'w')
+                doc.write(json.dumps(old))
+
+                logging.error(f'{self.transaction_id}:PUT(200) -  The document {self.collection}/'
+                              f'{self.document} are updated.')
+                return old
+            except JSONDecodeError:
+                logging.error(f'{self.transaction_id}:PUT(501) - The document {self.collection}/'
+                              f'{self.document} are damaged.')
+                return {
+                    '_db_status': 500,
+                    '_db_message': 'The document are damaged.'
+                }
         else:
             logging.error(f'{self.transaction_id}:PUT(404 - The document {self.collection}/'
                           f'{self.document} doesn\'t exist.')

@@ -16,10 +16,10 @@ def self_initialization():
                         datefmt='%H:%M:%S',
                         level=logging.DEBUG)
 
-    # try:
-    tcp_conn()
-    # except Exception as e:
-    #     print(f'err:\n{e}')
+    try:
+        tcp_conn()
+    except Exception as e:
+        print(f'err:\n{e}')
 
 
 if __name__ == '__main__':
